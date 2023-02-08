@@ -192,4 +192,8 @@ def get_pose_net(num_layers, heads, head_conv=96, model_type="movenet_lightning"
     assert num_layers == 0
     backbone = mobilenet_backbone('mobilenet_v2', pretrained=False, fpn=True, trainable_layers=0, model_type=model_type)
     model = MoveNet(backbone, heads, head_conv=head_conv, ft_size=ft_size)
+
+    print('get_pose_net model_type {}.'.format(model_type))
+    print('get_pose_net head_conv {}.'.format(head_conv))
+    print('get_pose_net ft_size {}.'.format(ft_size))
     return model
