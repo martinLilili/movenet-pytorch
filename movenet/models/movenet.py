@@ -98,6 +98,7 @@ class MoveNet(nn.Module):
 
         kpt_heatmap, center, kpt_regress, kpt_offset = x['hm_hp'].squeeze(0).permute((1, 2, 0)), x['hm'].squeeze(0).permute((1, 2, 0)), x['hps'].squeeze(0).permute((1, 2, 0)), x['hp_offset'].squeeze(0).permute((1, 2, 0))
 
+        # 后处理
         # pose decode
         kpt_heatmap = torch.sigmoid(kpt_heatmap)
         center = torch.sigmoid(center)

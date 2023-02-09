@@ -30,7 +30,7 @@ def main():
     # define some paths
     # onnx_model_path = '_models/{}.onnx'.format(args.model)
     # tf_model_path = '_models/{}_tf'.format(args.model)
-    tflite_model_path = '_models/{}3.tflite'.format(args.model)
+    tflite_model_path = '_models/{}4.tflite'.format(args.model)
     # script_model_path = '_models/{}.pt'.format(args.model)
 
     # load the PyTorch model

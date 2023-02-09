@@ -13,7 +13,8 @@ heads = {'hm': 1, 'hps': 34, 'hm_hp': 17, 'hp_offset': 34}
 def load_model(model_id, output_stride=4, ft_size=48, model_dir=MODEL_DIR):
     assert model_id in ['movenet_lightning', 'movenet_thunder'], 'The model name should be movenet_lightning or movenet_thudner'
     assert output_stride == 4, 'The current model only support output stride being 4.'
-    model_path = os.path.join(model_dir, model_id + '.pth')
+    # model_path = os.path.join(model_dir, model_id + '.pth')
+    model_path = os.path.join(model_dir, 'model_last.pth')
     if not os.path.exists(model_path):
         print('Cannot find models file %s, converting from tflite weights...' % model_path)
         from movenet.converter.tflite2pytorch import convert
@@ -23,7 +24,17 @@ def load_model(model_id, output_stride=4, ft_size=48, model_dir=MODEL_DIR):
     model = get_pose_net(0, heads, model_type=model_id, ft_size=ft_size)
     model_state_dict = model.state_dict()
 
-    state_dict = torch.load(model_path)
+    # state_dict = torch.load(model_path)
+    checkpoint = torch.load(model_path)
+    # print('loaded {}, epoch {}'.format(model_path, checkpoint['epoch']))
+    if 'state_dict' in checkpoint.keys():
+        state_dict = checkpoint['state_dict']
+        print('load_model11111')
+    else:
+        state_dict = checkpoint
+        print('load_mode22222')
+
+
 
     # Borrowed from centernet
     # check loaded parameters and created model parameters
